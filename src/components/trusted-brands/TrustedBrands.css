@@ -1,0 +1,26 @@
+.slide-for-trusted {
+  animation: slide-for-trusted 13s infinite linear;
+}
+
+@keyframes slide-for-trusted {
+  0% {
+    transform: translate(0%, 0);
+  }
+  100% {
+    transform: translate(-317%, 0);
+  }
+}
+
+/* 
+marquee {
+  animation: marquee 3s infinite linear;
+}
+
+@keyframes marquee {
+  0%{
+      transform: translateX(0%);
+  }
+  100%{
+      transform: translateX(-100%);
+  }
+} */

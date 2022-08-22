@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: inter-regular;
+  src: url(./assets/fonts/Inter/Inter-Regular.ttf);
+}
+@font-face {
+  font-family: inter-bold;
+  src: url(./assets/fonts/Inter/Inter-Bold.ttf);
+}
+@font-face {
+  font-family: inter-semibold;
+  src: url(./assets/fonts/Inter/Inter-SemiBold.ttf);
+}
+@font-face {
+  font-family: inter-medium;
+  src: url(./assets/fonts/Inter/Inter-Medium.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.fir {
+  font-family: inter-regular;
+}
+.fib {
+  font-family: inter-bold;
+}
+.fis {
+  font-family: inter-semibold;
+}
+.fim {
+  font-family: inter-medium;
+}
+body {
+  box-sizing: border-box;
+  font-family: inter-regular;
+}
+body,
+li,
+a,
+button,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: inter-regular;
+}
+.bg-white {
+  background-color: #fff;
+}
+.bg-blue {
+  background-color: #4d97ff;
+}
+.bg-gray {
+  background-color: #f9f9f9;
+}
+.text-blue {
+  color: #4d97ff;
+}
+.text-purple {
+  color: rgb(44, 8, 173)
+}
+
+input:checked ~ .dot {
+  transform: translateX(100%);
+}
+
+input:checked ~ .check-bg {
+  background-color: #6200ff;
+}
+
+/* .container {
+  margin: 0 auto;
+}
+@media (max-width:1620px) {
+  .container {
+    padding-left:  50px;
+    padding-right:  50px;
+  }
+}
+@media (max-width:700px) {
+  .container {
+    padding-left:  25px;
+    padding-right:  25px;
+  }
+} */
