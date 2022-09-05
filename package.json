@@ -8,10 +8,12 @@
     "@jitsi/react-sdk": "^1.0.2",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.0",
+    "@mui/x-date-pickers": "^5.0.0-beta.7",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "aos": "^2.3.4",
+    "dayjs": "^1.11.5",
     "firebase": "^9.9.0",
     "lottie-web": "^5.9.6",
     "react": "^18.2.0",
@@ -20,6 +22,7 @@
     "react-loading-icons": "^1.1.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "timepicker": "^1.13.18",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -21,6 +21,8 @@ import YourClassrooms from "./pages/your-classrooms";
 import StudentAndTeacherRoutes from "./router/StudentAndTeacherRoutes";
 import Dashboard from "./pages/dashboard";
 import StudyMaterial from "./pages/dashboard/StudyMaterial";
+import TestCreator from "./pages/dashboard/TestCreator"; 
+import MaterialsListComponent from "./components/dashboard/study-material/MaterialsListComponent";
 
 function App() {
 
@@ -52,7 +54,14 @@ function App() {
               <Route exact path="/your-classrooms" element={<YourClassrooms />} />  
               <Route path="/dashboard">
                 <Route exact path='' element={<Dashboard/>}/>
-                <Route exact path='study-material' element={<StudyMaterial/>}/>
+             
+                <Route exact path='study-material'>
+                  <Route exact  path='' element={<StudyMaterial/>}/>  
+                  <Route    path='study-material-list' element={<MaterialsListComponent/>}/>  
+                </Route>
+                
+                <Route exact path='test-creator' element={<TestCreator/>}/>
+              
               </Route>
             </Route>
           </Routes>

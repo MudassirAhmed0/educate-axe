@@ -1,11 +1,49 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import img from '../../../assets/images/dashboard/1.webp'
-import { Button } from '@mui/material'
 import CreateMaterialDialog from './CreateMaterialDialog'
-import DescriptionIcon from '@mui/icons-material/Description';
-import ScheduleIcon from '@mui/icons-material/Schedule';
+import { useSession } from '../../../firebase/UserProvider';
+import { dbase } from '../../../firebase';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import StudyMaterial from './StudyMaterial';
+import MaterialsListComponent from './MaterialsListComponent';
 
-const StudyMaterialHero = () => {
+const StudyMaterialHero = ({isTeacher}) => {
+    const [studyMaterials,setStudyMaterials] = useState([])
+    const [classroomId,setClassroomId] = useState('')
+    const [materials,setMaterials] = useState([])
+    const userSession = useSession()
+    useEffect(()=>{
+        const fetchClassroomId = async ()=>{
+            const docRef = doc(dbase,isTeacher ? "Teachers":"Students",userSession?.user?.uid );
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists()) {  
+                 setClassroomId(docSnap.data().classroomIds[0])
+                } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+                }
+        }
+        fetchClassroomId()
+    },[isTeacher])
+    const fetchStudyMaterials = async ()=>{
+
+        const docRef = collection(dbase, "Classrooms", classroomId,"StudyMaterialTopic");
+        const docSnaps = await getDocs(docRef);
+        let data =[]
+        docSnaps?.forEach(docSnap =>{
+            data.push(docSnap.data())
+        })
+        setStudyMaterials([...data])
+         
+       
+    }
+    useEffect(()=>{
+       
+        classroomId && fetchStudyMaterials()
+
+    },[classroomId])
+
     const noMaterial = (<>
         <img
             src={img}
@@ -15,62 +53,30 @@ const StudyMaterialHero = () => {
             No Study Material
         </span>
     </>)
-    const material =(
-        <div className='p-[24px] rounded-[8px] bg-[#f5f5f5] w-[100%] max-w-[800px]'>
-        <div className="flex border-b pb-[16px] justify-between flex-col gap-y-[15px]">
-            <div className="flex">
-                <DescriptionIcon color='primary' fontSize='large' />
-                <span className='text-[20px] ml-4 '>English Notes</span>
-            </div>
-            <div className='  flex gap-x-2 ml-auto'>
-                <Button
-                color='error'
-                variant='outlined'
-                >
-                    Delete
-                </Button>
-                <Button
-                color='primary'
-                variant='outlined'
-                >
-                    Edit
-                </Button>
-            </div>
-        </div>
-        <div className='flex gap-x-2 mt-4 items-center text-[14px] text-gray-400'>
-            <ScheduleIcon color='primary'/>
-            <span>
-                Aug 21, 2022
-            </span>
-        </div>
-    </div>
-    )
+    
 
     return (
         <section className='container flex flex-col items-center min-h-[60vh] py-[32px]'>
             <h2 className='text-[40px]   text-center  before:content-[""] relative before:absolute before:left-[50%] before:transform before:translate-x-[-50%] before:bottom-[0px] font-bold before:w-[45%] before:h-[2px] before:bg-black '>
                 Study Material
             </h2>
-            <div className='flex w-[100%] flex-col gap-y-6 items-center my-[32px]'>
+           { !materials.length >0 &&
+             <>
+           <div className='flex w-[100%] flex-col gap-y-6 items-center  my-6'>
 
-              {
-                material
-              }
-              {
-                material
-              }
-              {
-                material
-              }
-              {
-                material
-              }
+               {
+                studyMaterials?.map(studyMaterial=>(
+                    <StudyMaterial  isTeacher={isTeacher} fetchStudyMaterials={fetchStudyMaterials} setMaterials={setMaterials} classroomId={classroomId} key={studyMaterial.id} studyMaterial={studyMaterial}/>
+                ))
+              } 
+             
 
-
-                {/* {noMaterial} */}
+                { studyMaterials.length > 0 || noMaterial }
 
             </div>
-                <CreateMaterialDialog />
+               { isTeacher && <CreateMaterialDialog fetchClasses={fetchStudyMaterials} classroomId={classroomId} />}
+                </> 
+                }
         </section>
     )
 }

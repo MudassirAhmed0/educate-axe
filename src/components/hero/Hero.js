@@ -45,8 +45,8 @@ const Hero = () => {
 
     if (!user?.user?.uid) {
       setBtn({ link: '/', text: 'Get Started' })
-    } else if (isClasses) {
-      setBtn({ link: '/your-classrooms', text: 'Your Classrooms' })
+    } else if (isClasses ) {
+      setBtn({ link: '/dashboard', text: 'Dashboard' })
     }else if (isStudent) {
       setBtn({ link: '/join-class', text: 'Join Class' })
     } else if (isTeacher) {

@@ -6,7 +6,7 @@ input {
     margin: 5px 0;
 }
 button {
-    min-width: 100px;
+    /* min-width: 100px; */
     color: #fff;
     background-color: cadetblue;
     border-radius: 5px;
